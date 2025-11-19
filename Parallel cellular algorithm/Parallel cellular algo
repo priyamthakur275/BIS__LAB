@@ -1,0 +1,17 @@
+import numpy as np
+
+n=12
+m=3
+tasks=np.random.randint(5,25,n)
+routes=[0]*m
+assign=[[] for _ in range(m)]
+
+for t in tasks:
+    r=np.argmin(routes)
+    routes[r]+=t
+    assign[r].append(t)
+
+print("Tasks:",tasks)
+print("Route Loads:",routes)
+print("Assignments:",assign)
+print("Final Makespan:",max(routes))
