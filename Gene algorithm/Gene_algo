@@ -1,0 +1,116 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import random
+import cv2
+rows, cols = 128, 128
+x = np.tile(np.linspace(0, 255, cols, dtype=np.uint8), (rows, 1))
+noise = np.random.randint(0, 40, (rows, cols), dtype=np.uint8)
+img = cv2.add(x, noise)
+def fitness(threshold):
+foreground = img[img > threshold]
+background = img[img <= threshold]
+if len(foreground) == 0 or len(background) == 0:
+return 0
+w0 = len(background) / (rows * cols)
+w1 = len(foreground) / (rows * cols)
+m0 = np.mean(background)
+m1 = np.mean(foreground)
+return w0 * w1 * ((m0 - m1) ** 2)
+pop_
+size = 30
+generations = 40
+population = np.random.randint(0, 255, size=pop_
+size)
+for g in range(generations):
+scores = np.array([fitness(t) for t in population])
+best
+_
+idx = np.argmax(scores)
+best
+_
+threshold = population[best
+_
+idx]
+print(f"Generation {g+1} | Best threshold: {best
+_
+sorted
+_
+idx = np.argsort(scores)[::-1]
+parents = population[sorted
+_
+idx[:pop_
+size // 2]]
+children = []
+while len(children) < pop_
+size - len(parents):
+p1, p2 = random.sample(list(parents), 2)
+child = (p1 + p2) // 2
+if random.random() < 0.3:
+child += random.randint(-10, 10)
+child = np.clip(child, 0, 255)
+children.append(child)
+population = np.concatenate((parents, children))
+threshold}")
+best
+_
+threshold = int(best
+_
+threshold)
+print("\nGA Result → Best threshold found ="
+, best
+_
+threshold)
+9
+_
+, ga
+_
+result = cv2.threshold(img, best
+threshold, 255, cv2.THRESH
+_
+_
+BINARY)
+rule
+_
+threshold = int(0.65 * np.mean(img) + 40)
+, rule
+_
+_
+result = cv2.threshold(img, rule
+threshold, 255, cv2.THRESH
+_
+print("Rule-based threshold result ="
+, rule
+_
+threshold)
+_
+BINARY)
+plt.figure(figsize=(10, 8))
+plt.subplot(2, 1, 1)
+plt.imshow(ga
+_
+result, cmap='gray')
+plt.title(f"GA Threshold = {best
+_
+plt.subplot(2, 1, 2)
+plt.imshow(rule
+_
+result, cmap='gray')
+plt.title("GAE Rule-based")
+plt.tight
+_
+layout()
+plt.show()
+threshold}")
+print("\n* GA Result → Best threshold found ="
+, best
+_
+print("* GAE Rule-based result ="
+, rule
+_
+threshold)
+print("1) Original: synthetic gradient + noise")
+print("2) GA thresholding result ="
+, best
+_
+threshold)
+threshold)
