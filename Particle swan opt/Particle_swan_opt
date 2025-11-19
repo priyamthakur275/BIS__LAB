@@ -1,0 +1,33 @@
+import numpy as np
+
+def energy(x):
+    return 0.5*x**2 + 10*np.sin(x) + 20
+
+n=20
+w=0.6
+c1=1.4
+c2=1.4
+it=40
+
+x=np.random.uniform(-10,10,n)
+v=np.zeros(n)
+p=x.copy()
+pv=np.array([energy(i) for i in x])
+g=p[np.argmin(pv)]
+gv=min(pv)
+
+for _ in range(it):
+    r1=np.random.rand(n)
+    r2=np.random.rand(n)
+    v=w*v + c1*r1*(p-x) + c2*r2*(g-x)
+    x=x+v
+    vals=np.array([energy(i) for i in x])
+    b=vals<pv
+    p[b]=x[b]
+    pv[b]=vals[b]
+    if min(vals)<gv:
+        g=x[np.argmin(vals)]
+        gv=min(vals)
+
+print("Best value:", g)
+print("Min energy:", gv)
