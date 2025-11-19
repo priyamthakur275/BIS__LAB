@@ -1,0 +1,104 @@
+import numpy as np
+inputs = np.array([
+[0, 0],
+[0, 1],
+[1, 0],
+[1, 1]
+])
+expected = np.array([[0], [1], [1], [0]])
+def sigmoid(x):
+return 1 / (1 + np.exp(-x))
+def sigmoid
+_
+derivative(x):
+return x * (1 - x)
+def forward
+_pass(weights, x):
+w1 = weights[:4].reshape((2, 2))
+b1 = weights[4:6]
+w2 = weights[6:8].reshape((2, 1))
+b2 = weights[8]
+z1 = np.dot(x, w1) + b1
+a1 = sigmoid(z1)
+z2 = np.dot(a1, w2) + b2
+a2 = sigmoid(z2)
+return a2
+def fitness(weights):
+predictions = forward
+_pass(weights, inputs)
+error = np.mean((predictions - expected) ** 2)
+return -error
+pop_
+size = 100
+num
+_
+weights = 9
+generations = 200
+mutation
+rate = 0.1
+_
+population = np.random.uniform(-1, 1, (pop_
+size, num
+_
+weights))
+for generation in range(generations):
+fitness
+_
+scores = np.array([fitness(ind) for ind in population])
+sorted
+_
+idx = np.argsort(fitness
+_
+scores)[::-1]
+population = population[sorted
+_
+idx]
+fitness
+scores = fitness
+scores[sorted
+_
+_
+_
+idx]
+4
+top_
+n = int(0.2 * pop_
+size)
+parents = population[:top_
+n]
+children = []
+while len(children) < pop_
+size - top_
+n:
+p1, p2 = parents[np.random.randint(0, top_
+n, 2)]
+crossover = np.random.randint(1, num
+_
+weights)
+child = np.concatenate((p1[:crossover], p2[crossover:]))
+if np.random.rand() < mutation
+rate:
+_
+mutation
+_point = np.random.randint(num
+_
+weights)
+child[mutation
+_point] += np.random.uniform(-0.5, 0.5)
+children.append(child)
+population = np.vstack((parents, children))
+if generation % 10 == 0 or generation == generations - 1:
+print(f"Generation {generation+1} | Best fitness: {fitness
+_
+scores[0]:.4f}")
+best
+_
+weights = population[0]
+print("\nFinal predictions:")
+preds = forward
+_pass(best
+_
+weights, inputs)
+for i in range(len(inputs)):
+print(f"Input: {inputs[i]} => Predicted: {preds[i][0]:.4f} | Expected: {expected[i][0]}")
+print("\nDataset: XOR dataset")
