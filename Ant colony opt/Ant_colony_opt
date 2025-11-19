@@ -1,0 +1,72 @@
+import numpy as np
+import random
+
+dist=np.array([
+    [0,12,10,19,8],
+    [12,0,3,7,2],
+    [10,3,0,6,20],
+    [19,7,6,0,4],
+    [8,2,20,4,0]
+])
+
+n=dist.shape[0]
+ants=20
+alpha=1
+beta=2
+rho=0.5
+Q=100
+iters=40
+pher=np.ones((n,n))
+
+def tour_len(t):
+    s=0
+    for i in range(n-1):
+        s+=dist[t[i],t[i+1]]
+    s+=dist[t[-1],t[0]]
+    return s
+
+best=None
+best_len=1e9
+
+for it in range(1,iters+1):
+    all_tours=[]
+    for k in range(ants):
+        t=[random.randint(0,n-1)]
+        for _ in range(n-1):
+            c=t[-1]
+            probs=[]
+            for j in range(n):
+                if j not in t:
+                    p=(pher[c,j]**alpha)*((1/dist[c,j])**beta)
+                    probs.append((j,p))
+            s=sum([p for _,p in probs])
+            r=random.random()*s
+            tot=0
+            for j,p in probs:
+                tot+=p
+                if tot>=r:
+                    t.append(j)
+                    break
+        all_tours.append(t)
+
+    for t in all_tours:
+        L=tour_len(t)
+        if L<best_len:
+            best=t
+            best_len=L
+
+    pher=(1-rho)*pher
+    for t in all_tours:
+        L=tour_len(t)
+        for i in range(n-1):
+            a,b=t[i],t[i+1]
+            pher[a,b]+=Q/L
+            pher[b,a]+=Q/L
+        a,b=t[-1],t[0]
+        pher[a,b]+=Q/L
+        pher[b,a]+=Q/L
+
+    print("Iteration",it,"| Best:",best_len)
+
+print("Final Best Path:",best)
+print("Final Best Length:",best_len)
