@@ -1,0 +1,55 @@
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+
+# target star constellation (fixed points)
+target = np.array([
+    [1,1], [2,3], [3,2], [4,4], [5,1]
+])
+
+pop_size = 30
+num_stars = len(target)
+generations = 100
+mutation_rate = 0.1
+
+def create_individual():
+    return np.random.rand(num_stars, 2) * 6
+
+def fitness(ind):
+    return np.sum((ind - target)**2)
+
+def selection(pop):
+    scores = [(fitness(ind), ind) for ind in pop]
+    scores.sort(key=lambda x: x[0])
+    return scores[0][1], scores[1][1]
+
+def crossover(p1, p2):
+    cut = random.randint(1, num_stars-1)
+    c1 = np.vstack((p1[:cut], p2[cut:]))
+    c2 = np.vstack((p2[:cut], p1[cut:]))
+    return c1, c2
+
+def mutate(ind):
+    if random.random() < mutation_rate:
+        i = random.randint(0, num_stars-1)
+        ind[i] = np.random.rand(2) * 6
+    return ind
+
+pop = [create_individual() for _ in range(pop_size)]
+
+for g in range(generations):
+    new_pop = []
+    for _ in range(pop_size // 2):
+        p1, p2 = selection(pop)
+        c1, c2 = crossover(p1, p2)
+        new_pop.append(mutate(c1))
+        new_pop.append(mutate(c2))
+    pop = new_pop
+
+best = min(pop, key=fitness)
+
+plt.scatter(target[:,0], target[:,1], s=80)
+plt.scatter(best[:,0], best[:,1], s=80)
+plt.title("Genetic Algorithm – Star Constellation Matching")
+plt.legend(["Target", "Evolved"])
+plt.show()
