@@ -1,0 +1,44 @@
+import numpy as np
+import random
+
+
+img = np.random.rand(100,100)  # simple random image
+
+
+def add(x, y): return x + y
+def mul(x, y): return x * y
+def sub(x, y): return x - y
+
+ops = [add, mul, sub]
+consts = [0.2, 0.5, 1.0]
+
+
+def random_expr():
+    return (random.choice(ops), random.choice(consts), random.choice(consts))
+
+
+def apply_expr(expr, img):
+    op, a, b = expr
+    return np.clip(op(img * a, img * b), 0, 1)
+
+
+def fitness(expr):
+    new_img = apply_expr(expr, img)
+    return new_img.std()
+
+
+population = [random_expr() for _ in range(20)]
+
+for gen in range(10):
+    scored = sorted(population, key=fitness, reverse=True)
+    population = scored[:10]  # select top 10
+
+    # mutate
+    for i in range(10):
+        if random.random() < 0.3:
+            population.append(random_expr())
+
+    print("Generation", gen, "Best fitness:", fitness(population[0]))
+
+best = population[0]
+print("\nBest evolved expression:", best)
