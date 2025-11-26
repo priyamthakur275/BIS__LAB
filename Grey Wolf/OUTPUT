@@ -1,0 +1,69 @@
+Iter 1 | Alpha Score: 133.899532
+Iter 2 | Alpha Score: 130.253854
+Iter 3 | Alpha Score: 74.260304
+Iter 4 | Alpha Score: 43.519389
+Iter 5 | Alpha Score: 40.367626
+Iter 6 | Alpha Score: 23.127494
+Iter 7 | Alpha Score: 12.369282
+Iter 8 | Alpha Score: 8.493613
+Iter 9 | Alpha Score: 7.204231
+Iter 10 | Alpha Score: 3.856220
+Iter 11 | Alpha Score: 3.593602
+Iter 12 | Alpha Score: 2.266604
+Iter 13 | Alpha Score: 1.342608
+Iter 14 | Alpha Score: 1.124185
+Iter 15 | Alpha Score: 0.425609
+Iter 16 | Alpha Score: 0.268311
+Iter 17 | Alpha Score: 0.187136
+Iter 18 | Alpha Score: 0.137279
+Iter 19 | Alpha Score: 0.072475
+Iter 20 | Alpha Score: 0.072475
+Iter 21 | Alpha Score: 0.035489
+Iter 22 | Alpha Score: 0.020318
+Iter 23 | Alpha Score: 0.020318
+Iter 24 | Alpha Score: 0.010162
+Iter 25 | Alpha Score: 0.008815
+Iter 26 | Alpha Score: 0.004356
+Iter 27 | Alpha Score: 0.003009
+Iter 28 | Alpha Score: 0.002296
+Iter 29 | Alpha Score: 0.001578
+Iter 30 | Alpha Score: 0.001399
+Iter 31 | Alpha Score: 0.001002
+Iter 32 | Alpha Score: 0.000838
+Iter 33 | Alpha Score: 0.000386
+Iter 34 | Alpha Score: 0.000220
+Iter 35 | Alpha Score: 0.000147
+Iter 36 | Alpha Score: 0.000047
+Iter 37 | Alpha Score: 0.000047
+Iter 38 | Alpha Score: 0.000034
+Iter 39 | Alpha Score: 0.000023
+Iter 40 | Alpha Score: 0.000010
+Iter 41 | Alpha Score: 0.000008
+Iter 42 | Alpha Score: 0.000005
+Iter 43 | Alpha Score: 0.000004
+Iter 44 | Alpha Score: 0.000003
+Iter 45 | Alpha Score: 0.000002
+Iter 46 | Alpha Score: 0.000001
+Iter 47 | Alpha Score: 0.000001
+Iter 48 | Alpha Score: 0.000001
+Iter 49 | Alpha Score: 0.000001
+Iter 50 | Alpha Score: 0.000000
+Iter 51 | Alpha Score: 0.000000
+Iter 52 | Alpha Score: 0.000000
+Iter 53 | Alpha Score: 0.000000
+Iter 54 | Alpha Score: 0.000000
+Iter 55 | Alpha Score: 0.000000
+Iter 56 | Alpha Score: 0.000000
+Iter 57 | Alpha Score: 0.000000
+Iter 58 | Alpha Score: 0.000000
+Iter 59 | Alpha Score: 0.000000
+Iter 60 | Alpha Score: 0.000000
+Iter 61 | Alpha Score: 0.000000
+
+⚠️ Early stopping triggered (incomplete execution)
+
+
+Best Found Position: [-5.73667442e-05 -4.04627069e-05  6.84006691e-05  2.84426608e-05
+  9.84403136e-06 -6.55785170e-05 -5.45348964e-05  5.63847239e-05
+  4.49862412e-05 -4.41296443e-05]
+Best Score: 2.4937736730483603e-08
